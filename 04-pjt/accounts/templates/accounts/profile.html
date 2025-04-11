@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{{ user.username }}님의 관심 종목</h1>
+<div>
+  <form action="{% url 'accounts:add_interests' %}" method="post">
+    {% csrf_token %} {{ form }}
+    <!-- ... -->
+    <input type="submit" value="추가" />
+  </form>
+  {% for interest in interests %}
+    <div class="container mt-3">
+      <ul>
+        <div class="d-flex justify-content-between pb-2">
+          <div>
+            <li>
+              <a href="{% url "accounts:find_company" interest.name %}">{{ interest.name }}</a>
+            </li>
+          </div>
+          <div>
+            <form action="{% url "accounts:delete_interests" interest.pk %}" method="post">
+              {% csrf_token %}
+              <input class="btn btn-outline-danger pt-1 pb-1" type="submit" value="제거">
+            </form>
+          </div>
+        </div>
+      </ul>
+    <div>
+      <form action="" method="post">
+        {% csrf_token %}
+        <!-- ... -->
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+  <div class="container text-end">
+    <a class="btn btn-primary" href="{% url 'stock_finder' %}">Back</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Update</h1>
+  <form action="{% url 'accounts:update' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="btn btn-outline-danger pt-1 pb-1"type="submit" value="정보 수정하기" />
+  </form>
+  
+  <p>비밀번호를 변경하고 싶은 경우 <a href="{% url "accounts:change_password" %}">여기</a>를 눌러 주세요.</p>
+
+  <div class="container text-end">
+    <a class="btn btn-primary " href="{% url 'stock_finder' %}">Back</a>
+  </div>
+{% endblock %}
